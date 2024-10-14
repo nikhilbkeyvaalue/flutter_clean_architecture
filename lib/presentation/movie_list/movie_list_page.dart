@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clean_architecture/core/extensions/build_context_extension.dart';
 import 'package:flutter_clean_architecture/core/view/base_view.dart';
 import 'package:flutter_clean_architecture/data/data_sources/network/client/dio/dio_network_service.dart';
 import 'package:flutter_clean_architecture/data/data_sources/network/remote_sources/movie_remote_data_source.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_clean_architecture/domain/entities/movie_entity.dart';
 import 'package:flutter_clean_architecture/domain/use_cases/get_movies_use_case.dart';
 import 'package:flutter_clean_architecture/presentation/movie_list/movie_list_cubit.dart';
 import 'package:flutter_clean_architecture/presentation/movie_list/movie_list_state.dart';
+import 'package:flutter_clean_architecture/presentation/widgets/movie_list_card.dart';
 
 class MovieListPage extends StatelessWidget {
   const MovieListPage({super.key});
@@ -23,7 +25,9 @@ class MovieListPage extends StatelessWidget {
           create: (context) => MovieListCubit(GetMoviesUseCase(
             MovieRepoImpl(
               MovieRemoteDataSourceImpl(
-                networkService: DioNetWorkService(client: Dio()),
+                networkService: DioNetWorkService(
+                    client: Dio(
+                        BaseOptions(baseUrl: "https://api.themoviedb.org/3"))),
               ),
             ),
           )),
@@ -41,14 +45,14 @@ class MovieListPage extends StatelessWidget {
         return BaseView(
             resource: state.movies,
             onSuccess: (List<MovieEntity> movies) {
-              return ListView.builder(
-                itemCount: movies.length,
-                itemBuilder: (context, index) {
-                  final movie = movies[index];
-                  return ListTile(
-                    title: Text(movie.title),
-                  );
-                },
+              return GridView.count(
+                childAspectRatio: 2,
+                crossAxisCount: context.rsp.isMobile
+                    ? 1
+                    : context.rsp.isDesktop
+                        ? 4
+                        : 2,
+                children: movies.map((e) => MovieListCard(e, context)).toList(),
               );
             },
             resourceCall: cubit.getMovies);

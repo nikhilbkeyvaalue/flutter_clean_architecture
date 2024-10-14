@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_clean_architecture/domain/entities/movie_entity.dart';
 
-Card MovieListCard( BuildContext context) {
+Card MovieListCard(MovieEntity movieEntity, BuildContext context) {
   return Card(
       child: Padding(
     padding: const EdgeInsets.all(8.0),
@@ -13,11 +14,10 @@ Card MovieListCard( BuildContext context) {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: CachedNetworkImage(
-              imageUrl: "",
+              imageUrl: movieEntity.posterPath ?? "",
               fit: BoxFit.cover,
               width: double.infinity,
-              height:double.infinity,
-
+              height: double.infinity,
             ),
           ),
         ),
@@ -30,7 +30,7 @@ Card MovieListCard( BuildContext context) {
             children: [
               Flexible(
                 child: Text(
-                  "",
+                  movieEntity.title,
                   maxLines: 2,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
@@ -40,7 +40,7 @@ Card MovieListCard( BuildContext context) {
               ),
               Flexible(
                 child: Text(
-                  "",
+                  movieEntity.body,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       fontSize: 11,
                       color: Theme.of(context)
@@ -58,7 +58,7 @@ Card MovieListCard( BuildContext context) {
                 child: Row(
                   children: [
                     Text(
-                      "",
+                      movieEntity.rating.toString(),
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(
