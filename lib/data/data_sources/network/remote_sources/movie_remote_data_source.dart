@@ -4,11 +4,13 @@ import 'package:flutter_clean_architecture/data/data_sources/network/client/netw
 import 'package:flutter_clean_architecture/data/mappers/movie_mapper.dart';
 import 'package:flutter_clean_architecture/data/models/movie_list_dto.dart';
 import 'package:flutter_clean_architecture/domain/entities/movie_entity.dart';
+import 'package:injectable/injectable.dart';
 
 abstract class MovieRemoteDataSource {
   Future<Resource<List<MovieEntity>>> getMovies();
 }
 
+@Injectable(as: MovieRemoteDataSource)
 class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
   NetworkService networkService;
 

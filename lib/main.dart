@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_architecture/core/di/injectable.dart';
 import 'package:flutter_clean_architecture/presentation/movie_list/movie_list_page.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-void main() {
+void main() async {
+  await configureInjection();
   runApp(const MyApp());
 }
 

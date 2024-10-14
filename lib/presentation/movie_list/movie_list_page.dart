@@ -1,11 +1,8 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clean_architecture/core/di/injectable.dart';
 import 'package:flutter_clean_architecture/core/extensions/build_context_extension.dart';
 import 'package:flutter_clean_architecture/core/view/base_view.dart';
-import 'package:flutter_clean_architecture/data/data_sources/network/client/dio/dio_network_service.dart';
-import 'package:flutter_clean_architecture/data/data_sources/network/remote_sources/movie_remote_data_source.dart';
-import 'package:flutter_clean_architecture/data/repositories/movie_repo_impl.dart';
 import 'package:flutter_clean_architecture/domain/entities/movie_entity.dart';
 import 'package:flutter_clean_architecture/domain/use_cases/get_movies_use_case.dart';
 import 'package:flutter_clean_architecture/presentation/movie_list/movie_list_cubit.dart';
@@ -22,15 +19,7 @@ class MovieListPage extends StatelessWidget {
           title: Text('Movie List'),
         ),
         body: BlocProvider(
-          create: (context) => MovieListCubit(GetMoviesUseCase(
-            MovieRepoImpl(
-              MovieRemoteDataSourceImpl(
-                networkService: DioNetWorkService(
-                    client: Dio(
-                        BaseOptions(baseUrl: "https://api.themoviedb.org/3"))),
-              ),
-            ),
-          )),
+          create: (context) => MovieListCubit(getIt<GetMoviesUseCase>()),
           child: _buildBody(context),
         ));
   }

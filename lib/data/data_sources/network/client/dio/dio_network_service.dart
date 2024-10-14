@@ -8,7 +8,9 @@ import 'package:flutter_clean_architecture/data/data_sources/network/client/api_
 import 'package:flutter_clean_architecture/data/data_sources/network/client/api_response.dart';
 import 'package:flutter_clean_architecture/data/data_sources/network/client/dio/dio_interceptors/log_interceptor.dart';
 import 'package:flutter_clean_architecture/data/data_sources/network/client/network_service.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: NetworkService)
 class DioNetWorkService extends NetworkService {
   DioNetWorkService({
     required Dio client,
