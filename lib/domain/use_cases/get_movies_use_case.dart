@@ -7,7 +7,7 @@ class GetMoviesUseCase {
 
   GetMoviesUseCase(this._moviesRepository);
 
-  Future<Resource<List<MovieEntity>>> execute() {
+  Future<Resource<List<MovieEntity>>> call() {
     return _moviesRepository.getMovies();
   }
 }
