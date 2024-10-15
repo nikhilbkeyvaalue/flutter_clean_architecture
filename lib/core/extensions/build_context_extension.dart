@@ -20,3 +20,4 @@ extension BuildContextHelper on BuildContext {
 
   ResponsiveBreakpointsData get rsp => ResponsiveBreakpoints.of(this);
 }
+
