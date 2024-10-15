@@ -14,10 +14,7 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
 
   MovieRemoteDataSourceImpl({required this.networkService});
 
-  var header = {
-    "Authorization":
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OGIwYjlkYWVjMWQ1YWVmYmQxZmFiOTZkZjg5ZTQxNyIsIm5iZiI6MTcyODY1MTg2MS43MzczNzYsInN1YiI6IjYyNjY2Mzk2N2ZjYWIzMTE2NzI4MDkwMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1xKqin928Jfi864U9lnyed8JUuyZhtNW367DJI1HbwU"
-  };
+  var header = {"Authorization": "Bearer "};
 
   @override
   Future<Resource<List<MovieEntity>>> getMovies() async {
