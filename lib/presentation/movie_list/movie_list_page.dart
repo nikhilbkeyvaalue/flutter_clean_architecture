@@ -5,8 +5,8 @@ import 'package:flutter_clean_architecture/core/view/base_view.dart';
 import 'package:flutter_clean_architecture/data/data_sources/network/client/dio/dio_network_service.dart';
 import 'package:flutter_clean_architecture/data/data_sources/network/remote_sources/movie_remote_data_source.dart';
 import 'package:flutter_clean_architecture/data/repositories/movie_repo_impl.dart';
-import 'package:flutter_clean_architecture/domain/entities/movie_entity.dart';
-import 'package:flutter_clean_architecture/domain/use_cases/get_movies_use_case.dart';
+import 'package:flutter_clean_architecture/domain/movies/entities/movie_entity.dart';
+import 'package:flutter_clean_architecture/domain/movies/use_cases/get_movies_use_case.dart';
 import 'package:flutter_clean_architecture/presentation/movie_list/movie_list_cubit.dart';
 import 'package:flutter_clean_architecture/presentation/movie_list/movie_list_state.dart';
 
@@ -47,6 +47,7 @@ class MovieListPage extends StatelessWidget {
                   final movie = movies[index];
                   return ListTile(
                     title: Text(movie.title),
+                    subtitle: Text(movie.body),
                   );
                 },
               );
