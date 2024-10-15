@@ -1,3 +1,4 @@
+import 'package:flutter_clean_architecture/core/models/env_model.dart';
 import 'package:flutter_clean_architecture/core/models/resource.dart';
 import 'package:flutter_clean_architecture/data/data_sources/network/client/api_request_representable.dart';
 import 'package:flutter_clean_architecture/data/data_sources/network/client/network_service.dart';
@@ -13,16 +14,14 @@ abstract class MovieRemoteDataSource {
 @Injectable(as: MovieRemoteDataSource)
 class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
   NetworkService networkService;
+  EnvModel envModel;
 
-  MovieRemoteDataSourceImpl({required this.networkService});
-
-  var header = {
-    "Authorization":
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OGIwYjlkYWVjMWQ1YWVmYmQxZmFiOTZkZjg5ZTQxNyIsIm5iZiI6MTcyODY1MTg2MS43MzczNzYsInN1YiI6IjYyNjY2Mzk2N2ZjYWIzMTE2NzI4MDkwMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1xKqin928Jfi864U9lnyed8JUuyZhtNW367DJI1HbwU"
-  };
+  MovieRemoteDataSourceImpl(
+      {required this.networkService, required this.envModel});
 
   @override
   Future<Resource<List<MovieEntity>>> getMovies() async {
+    var header = {"Authorization": "Bearer ${envModel.apiKey}"};
     var response = await networkService.get(APIRequestRepresentable(
         headers: header,
         url:

@@ -6,6 +6,6 @@ final getIt = GetIt.instance;
 
 @InjectableInit()
 configureInjection() async {
-  getIt.init(environment: "app");
+  await getIt.init(environment: "app");
   await getIt.allReady();
 }
