@@ -1,5 +1,6 @@
 import 'package:flutter_clean_architecture/data/models/movie_list_dto.dart';
-import 'package:flutter_clean_architecture/domain/entities/movie_entity.dart';
+import 'package:flutter_clean_architecture/domain/movies/entities/movie_entity.dart';
+
 
 class MovieMappers {
   static List<MovieEntity> movieListEntityFromDTO(MovieListDto movieListDto) {
