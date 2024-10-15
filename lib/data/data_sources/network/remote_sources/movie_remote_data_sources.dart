@@ -13,10 +13,10 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
 
   @override
   Future<Resource<List<MovieEntity>>> getMovies() async {
-    return ResourceSuccess([
-      MovieEntity(id: "werwe", title: "erwer", body: "werwerw"),
-      MovieEntity(id: "werwe", title: "erwer", body: "werwerw"),
-      MovieEntity(id: "werwe", title: "erwer", body: "werwerw")
+    return const ResourceSuccess([
+      MovieEntity(id: "1", title: "Movie 1", body: "lorem ipsum dolar sit amet"),
+      MovieEntity(id: "2", title: "Movie 2", body: "lorem ipsum dolar sit amet"),
+      MovieEntity(id: "3", title: "Movie 3", body: "lorem ipsum dolar sit amet")
     ]);
   }
 }
